@@ -40,13 +40,18 @@ files <- list.files() #listing all files
 
 #grabbing just those with data
 files_use <- 1:length(files)
+rm_files <- c()
 for(i in files_use){
 	test_i <- strsplit(files[i], "-")
 	if(length(unlist(test_i)) == 3){
 		next
 	}else{
-		files_use <- files_use[-i]
+		rm_files <- c(rm_files, i)
 	}
+}
+
+if(length(rm_files) > 0){
+	files_use <- files_use[-rm_files]
 }
 
 #loading files, creating time series
