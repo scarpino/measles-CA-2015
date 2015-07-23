@@ -79,3 +79,11 @@ if(write_new == TRUE){
 plot(as.Date(as.character(dat_ts[,"date"]), format = "%m-%d-%Y"), rowSums(dat_ts[,-1], na.rm = TRUE), type = "l", lwd = 3, xlab = "2015", ylab = "New measles cases in CA USA")
 
 plot(as.Date(as.character(dat_ts[,"date"]), format = "%m-%d-%Y"), cumsum(rowSums(dat_ts[,-1], na.rm = TRUE)), type = "l", lwd = 3, xlab = "2015", ylab = "Cumulative measles cases in CA USA")
+
+col_func <- colorRampPalette(colors = c("#7bccc4", "#2b8cbe", "#084081"))
+colors <- col_func(20)
+
+par(mar = c(4,9,2,2))
+image(as.matrix(log(dat_ts[,-1])), xaxt = "n", yaxt = "n", col = colors)
+axis(1, at = seq(0,1,length.out = nrow(dat_ts)), labels = substr(dat_ts[,"date"], 1, 5), las = 2)
+axis(2, at = seq(0,1,length.out = ncol(dat_ts) - 1), labels = colnames(dat_ts)[-1], las = 2)
